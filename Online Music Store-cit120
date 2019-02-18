@@ -1,0 +1,159 @@
+// Calculates the charges for songs downloaded. 
+// Online Music Store Charges.
+// Programmer: Khelan Modi
+// Date Modified: Feb' 16, 2019
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	system("title Switch Case Lab  --  On line Music Store by K. Modi");
+	system("color 3f");
+
+	const double SALES_TAX = 0.06,
+		PACKAGE_A = 4.99,
+		PACKAGE_B = 9.99,
+		PACKAGE_C = 14.99,
+		ADDITIONAL_A = 0.99,
+		ADDITIONAL_B = 0.59,
+		ADDITIONAL_C = 0.29;
+
+	char inputPackage;
+	int songsDownloaded;
+	//double totalBill;
+
+	double	priceAfterTax;
+	//int k = 0;
+	cout
+		<< "\n"
+		<< "\t\t            Switch Case GROUP Lab               \n"
+		<< "\t\t             On line music store                \n"
+		<< "\t\t  also needs nested if ... else statements      \n"
+		<< "\t\t        and the conditional operator            \n"
+		<< "\t\t and the use of \"continue\" int one place ONLY \n"
+		<< "\t\t by K. Modi                                     \n\n";
+	while (true) {
+
+		cout
+			<< "\n\n\n"
+			<< "Here are the possible option packages offered in our store: \n"
+			<< "\tPackage A: Monthly fee $ 4.99. 10 free songs and $0.99 per song after that.\n"
+			<< "\tPackage B: Monthly fee $ 9.99. 20 free songs and $0.59 per song after that.\n"
+			<< "\tPackage C: Monthly fee $14.99. 30 free songs and $0.29 per song after that.\n\n";
+
+		cout << fixed << showpoint << setprecision(2);
+
+		cout
+			<< "Please select the option package that you have? ";
+		cin >> inputPackage;
+
+		if (inputPackage == 'A' || inputPackage == 'a' || inputPackage == 'B' || inputPackage == 'b' || inputPackage == 'C' || inputPackage == 'c')
+		{
+			cout << " How many songs did you download this month? ";
+			cin >> songsDownloaded;
+
+			if (inputPackage == 'A' || inputPackage == 'a')
+			{
+				if (songsDownloaded <= 10)
+
+				{
+					priceAfterTax = PACKAGE_A * SALES_TAX;
+					cout << "Your total bill for this month is $" << PACKAGE_A << " + " << priceAfterTax << "(for tax) = " << PACKAGE_A + priceAfterTax << ".\n\n";
+				}
+				else if (songsDownloaded < 0)
+				{
+					cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+				}
+				else {
+					switch (inputPackage)
+					{
+					case 'A':
+						priceAfterTax = (songsDownloaded - 10)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_A + ((songsDownloaded - 10)*ADDITIONAL_A) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_A + ((songsDownloaded - 10)*ADDITIONAL_A) + ((songsDownloaded - 10)*SALES_TAX) + (PACKAGE_A*SALES_TAX)) << ".\n\n";
+						break;
+					case 'a':
+						priceAfterTax = (songsDownloaded - 10)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_A + ((songsDownloaded - 10)*ADDITIONAL_A) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_A + ((songsDownloaded - 10)*ADDITIONAL_A) + ((songsDownloaded - 10)*SALES_TAX) + (PACKAGE_A*SALES_TAX)) << ".\n\n";
+						break;
+					default:
+						break;
+					}
+				}
+			}
+
+			else if (inputPackage == 'B' || inputPackage == 'b')
+			{
+				if (songsDownloaded <= 20)
+				{
+					priceAfterTax = PACKAGE_B * SALES_TAX;
+					cout << "Your total bill for this month is $" << PACKAGE_B << " + " << priceAfterTax << "(for tax) = " << PACKAGE_B + priceAfterTax << ".\n\n";
+
+				}
+				else if (songsDownloaded < 0)
+				{
+					cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+				}
+				else
+				{
+					switch (inputPackage)
+					{
+					case 'B':
+						priceAfterTax = ((songsDownloaded - 20)*ADDITIONAL_B)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_B + ((songsDownloaded - 20)*ADDITIONAL_B) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_B + ((songsDownloaded - 20)*ADDITIONAL_B) + ((songsDownloaded - 20)*SALES_TAX) + (PACKAGE_B*SALES_TAX)) << ".\n\n";
+						break;
+					case 'b':
+						priceAfterTax = ((songsDownloaded - 20)*ADDITIONAL_B)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_B + ((songsDownloaded - 20)*ADDITIONAL_B) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_B + ((songsDownloaded - 20)*ADDITIONAL_B) + ((songsDownloaded - 20)*SALES_TAX) + (PACKAGE_B*SALES_TAX)) << ".\n\n";
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			else if (inputPackage == 'C' || inputPackage == 'c')
+			{
+				if (songsDownloaded <= 30)
+				{
+					priceAfterTax = PACKAGE_C * SALES_TAX;
+					cout << "Your total bill for this month is $" << PACKAGE_C << " + " << priceAfterTax << "(for tax) = " << PACKAGE_C + priceAfterTax << ".\n\n";
+				}
+				else if (songsDownloaded < 0)
+				{
+					cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+				}
+				else {
+					switch (inputPackage)
+					{
+
+					case 'C':
+						priceAfterTax = ((songsDownloaded - 30)*ADDITIONAL_C)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_C + ((songsDownloaded - 30)*ADDITIONAL_C) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_C + ((songsDownloaded - 30)*ADDITIONAL_C) + ((songsDownloaded - 30)*SALES_TAX) + (PACKAGE_C*SALES_TAX)) << ".\n\n";
+						break;
+
+					case 'c':
+						priceAfterTax = ((songsDownloaded - 30)*ADDITIONAL_C)*SALES_TAX;
+						cout << "Your total bill for this month is $" << PACKAGE_C + ((songsDownloaded - 30)*ADDITIONAL_C) << " + " << priceAfterTax << "(for tax) = " << (PACKAGE_C + ((songsDownloaded - 30)*ADDITIONAL_C) + ((songsDownloaded - 30)*SALES_TAX) + (PACKAGE_C*SALES_TAX)) << ".\n\n";
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
+		else {
+
+			cout << "\n\t\t***Sorry we do not offer that package. \n\n\n";
+		}
+
+		cout << "\t\t ************************************** \n";
+
+		system("pause");
+
+	}
+	system("pause");
+	return 0;
+}
