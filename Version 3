@@ -1,0 +1,186 @@
+// Calculates the charges for songs downloaded. 
+// Online Music Store Charges.
+// Programmer: Khelan Modi
+// Date Modified: Feb' 16, 2019
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	system("title Switch Case Lab  --  On line Music Store by K. Modi");
+	system("color 3f");
+
+	//Declaring all the CONSTANTS needed for this code.
+	const double
+		SALES_TAX = 0.06,
+		PACKAGE_A = 4.99,
+		PACKAGE_B = 9.99,
+		PACKAGE_C = 14.99,
+		ADDITIONAL_A = 0.99,
+		ADDITIONAL_B = 0.59,
+		ADDITIONAL_C = 0.29;
+
+	// declaring all the VARIABLES needed for this code.
+	char inputPackage, ch;
+	double songsDownloaded;
+	double totalBill, priceAfterTax;
+	int k = 0;
+	char cPACKAGE_a = 'a', cPACKAGE_b = 'b', cPACKAGE_c = 'c';
+	char cPACKAGE_A = 'A', cPACKAGE_B = 'B', cPACKAGE_C = 'C';
+
+	//Banner of the lab
+	cout
+		<< "                                                      \n"
+		<< "\t                Switch Case GROUP Lab               \n"
+		<< "\t                 On line music store                \n"
+		<< "\t      also needs nested if ... else statements      \n"
+		<< "\t            and the conditional operator            \n"
+		<< "\t    and the use of \"continue\" int one place ONLY  \n"
+		<< "\t                     by K. Modi                   \n\n";
+
+	while (true) { //the loop starts.
+
+		//displaying the package choices
+		cout
+			<< "                                                                              \n"
+			<< "Here are the possible option packages offered in our store:                   \n"
+			<< "   Package A: Monthly fee $ 4.99. 10 free songs and $0.99 per song after that.\n"
+			<< "   Package B: Monthly fee $ 9.99. 20 free songs and $0.59 per song after that.\n"
+			<< "   Package C: Monthly fee $14.99. 30 free songs and $0.29 per song after that.\n\n";
+
+		cout << fixed << showpoint << setprecision(2); // allowing only 2 decimal places after the decimal point.
+
+		//askes the user to choice a package
+		cout << "Please select the option package that you have? ";
+		cin >> inputPackage; cin.ignore(200, '\n');
+
+		{
+			switch (inputPackage) // calculating the total amount the customer has to pay if he paying additional songs.
+			{ //both lowercase as well as uppercase are valid for this code. 
+			case 'a': //both lowercase as well as uppercase are valid for this code.
+			case 'A': inputPackage == cPACKAGE_A && inputPackage == cPACKAGE_a;            break;
+			case 'b'://both lowercase as well as uppercase are valid for this code.
+			case 'B': inputPackage == cPACKAGE_B && inputPackage == cPACKAGE_b;           break;
+			case 'c': //both lowercase as well as uppercase are valid for this code.
+			case 'C': inputPackage == cPACKAGE_C && inputPackage == cPACKAGE_c;	   		break; // break for inputPackage switch statement 
+			default:
+				cout << "\n\t*** Sorry we do not offer that packet! \n";
+				continue;
+
+			}
+		}
+		cout << " How many songs did you download this month? ";
+		cin >> songsDownloaded; cin.ignore(200, '\n');
+
+		//Following is for package 'A'
+		if ((inputPackage == cPACKAGE_A) || (inputPackage == cPACKAGE_a))// == 'A' && inputPackage == 'a')
+		{
+			if (songsDownloaded != int(songsDownloaded))
+			{
+				cout << "\t*** Your number of songs needs to be a whole number!\n\n";
+			}
+			else if (songsDownloaded <= 10 && songsDownloaded >= 0) //Minimum amount the customer has to pay for package 'A'.
+			{
+				priceAfterTax = PACKAGE_A * SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_A << " + " << priceAfterTax << " (for tax) = " << PACKAGE_A + priceAfterTax << ".\n\n";
+			}
+			else if (songsDownloaded < 0) // if the customers enters a negative number.
+			{
+				cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+			}
+			else if (songsDownloaded == 11) //Buying only one additional song
+			{
+				priceAfterTax = (PACKAGE_A + ADDITIONAL_A * (songsDownloaded - 10))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_A + ADDITIONAL_A * (songsDownloaded - 10) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_A + priceAfterTax << ".\n\n";
+
+				cout << "\tYou have $" << ADDITIONAL_A << " extra charges for having 1 more song \n"
+					<< "\tthan your monthly limit of 10 free songs.\n\n";
+			}
+			else { //buying more than one song
+				priceAfterTax = (PACKAGE_A + ADDITIONAL_A * (songsDownloaded - 10))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_A + ADDITIONAL_A * (songsDownloaded - 10) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_A + priceAfterTax << ".\n\n";
+
+				cout << "\tYou have $" << ADDITIONAL_A * (songsDownloaded - 10) << " extra charges for having " << (songsDownloaded - 10) << " more songs \n"
+					<< "\tthan your monthly limit of 10 free songs.\n\n";
+
+			}
+		}
+
+		//if the customer enters package 'B'.
+		if ((inputPackage == cPACKAGE_B) || (inputPackage == cPACKAGE_b))// && inputPackage == 'b')
+		{
+			if (songsDownloaded != int(songsDownloaded))
+			{
+				cout << "\t*** Your number of songs needs to be a whole number!\n\n";
+			}
+			else if (songsDownloaded <= 20 && songsDownloaded >= 0) //minimum amount the customer has to pay for Package 'B'
+			{
+				priceAfterTax = PACKAGE_B * SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_B << " + " << priceAfterTax << "(for tax) = " << PACKAGE_B + priceAfterTax << ".\n\n";
+			}
+			else if (songsDownloaded < 0) //if the customer inputs a negative number.
+			{
+				cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+			}
+			else if (songsDownloaded == 21)
+			{
+				//if only one additional song is downloaded
+				priceAfterTax = (PACKAGE_B + ADDITIONAL_B * (songsDownloaded - 20))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_B + ADDITIONAL_B * (songsDownloaded - 20) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_B + priceAfterTax << ".\n\n";
+
+				cout << "\tYou have $" << ADDITIONAL_B << " extra charges for having 1 more song \n"
+					<< "\tthan your monthly limit of 20 free songs.\n\n";
+			}
+			else {//charges for more than one additional song is downloaded
+				priceAfterTax = (PACKAGE_B + ADDITIONAL_B * (songsDownloaded - 20))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_B + ADDITIONAL_B * (songsDownloaded - 20) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_B + priceAfterTax << ".\n\n";
+
+				cout << "\tYou have $" << ADDITIONAL_B * (songsDownloaded - 20) << " extra charges for having " << (songsDownloaded - 20) << " more songs \n"
+					<< "\tthan your monthly limit of 20 free songs.\n\n";
+			}
+		}
+
+		//for the package 'C'
+		if ((inputPackage == cPACKAGE_C) || (inputPackage == cPACKAGE_c))
+		{
+			if (songsDownloaded != int(songsDownloaded))
+			{
+				cout << "\t*** Your number of songs needs to be a whole number!\n\n";
+			}
+			else if (songsDownloaded <= 30 && songsDownloaded >= 0) //minimum amount to be paid for Package 'C'
+			{
+				priceAfterTax = PACKAGE_C * SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_C << " + " << priceAfterTax << "(for tax) = " << PACKAGE_C + priceAfterTax << ".\n\n";
+			}
+			else if (songsDownloaded < 0) // if user inputs a negative number.
+			{
+				cout << "\n\t\t*** You cannot have a negative number of songs!.\n";
+			}
+			else if (songsDownloaded == 31) { // if only one additional song has been downloaded
+				priceAfterTax = (PACKAGE_C + ADDITIONAL_C * (songsDownloaded - 30))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_C + ADDITIONAL_C * (songsDownloaded - 30) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_C + priceAfterTax << ".\n\n";
+
+				cout << "\tYou have $" << ADDITIONAL_C << " extra charges for having 1 more song \n"
+					<< "\tthan your monthly limit of 30 free songs.\n\n";
+			}
+			else {// if more than one additional songs are downloaded for package 'C'
+				priceAfterTax = (PACKAGE_C + ADDITIONAL_C * (songsDownloaded - 30))* SALES_TAX;
+				cout << "Your total bill for this month is $" << PACKAGE_C + ADDITIONAL_C * (songsDownloaded - 30) << " + " << priceAfterTax << " (for tax) = " << PACKAGE_C + priceAfterTax << ".\n\n";
+				cout << "\tYou have $" << ADDITIONAL_C * (songsDownloaded - 30) << " extra charges for having " << (songsDownloaded - 30) << " more songs \n"
+					<< "\tthan your monthly limit of 30 free songs.\n\n";
+			}
+		}
+		cout << endl;
+
+		system("pause"); // halting the screen after every while loop 
+	}
+	cout << endl;
+
+	{	cout << "\t**********************************************\n";
+	}
+	system("pause"); // overall halting the screen, outside the while loop.
+	return 0;
+}
