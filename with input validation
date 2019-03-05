@@ -1,0 +1,170 @@
+// This lab prints an online music store's package options and calculates the total ammount due
+// Switch Case Music Store Group Lab #5
+// By Blue Team
+// Date modified: February 21st, 2019
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+int main()
+{
+	system("title Switch Case Group Lab - by BLUE TEAM");
+	system("color 31");
+
+	const double
+		SALES_TAX = 0.06,
+		PACKAGE_A = 4.99,
+		PACKAGE_B = 9.99,
+		PACKAGE_C = 14.99,
+		ADDITIONAL_A = 0.99,
+		ADDITIONAL_B = 0.59,
+		ADDITIONAL_C = 0.29;
+
+	const int
+		FREE_SONGS_A = 10,
+		FREE_SONGS_B = 20,
+		FREE_SONGS_C = 30;
+
+	bool packageA, packageB, packageC;
+	char packageChoice;
+	double songsDownloaded, songBill, totalBill;
+
+	cout
+		<< "\n"
+		<< "\t\t             Switch Case GROUP Lab              \n"
+		<< "\t\t              Online Music Store                \n"
+		<< "\t\t   also needs nested if ... else statements     \n"
+		<< "\t\t         and the conditional operator           \n"
+		<< "\t\t and the use of \"continue\" in one place only  \n"
+		<< "\t\t      with input validation and FUNCTIONS       \n"
+		<< "\t\t            by Blue Team			             \n\n\n";
+
+	while (true)
+	{
+		cout
+			<< "Here are the possible option choices available at our store:\n"
+			<< " Package A: Monthly fee $ " << PACKAGE_A << ". 10 free songs and $" << ADDITIONAL_A << " per song after that.\n"
+			<< " Package B: Monthly fee $ " << PACKAGE_B << ". 20 free songs and $" << ADDITIONAL_B << " per song after that.\n"
+			<< " Package C: Monthly fee $" << PACKAGE_C << ". 30 free songs and $" << ADDITIONAL_C << " per song after that.\n\n"
+
+			<< "Please select the menu option package you have? ";
+		cin >> packageChoice; cin.ignore(200, '\n');
+
+		cout << fixed << showpoint << setprecision(2);
+
+		switch (packageChoice) {
+		case 'A':
+		case 'a': packageA = 1; break;
+		case 'B':
+		case 'b': packageB = 1; break;
+		case 'C':
+		case 'c': packageC = 1; break;
+		default:
+			cout << "\n\t*** Sorry we do not offer that package.\n\n\n";
+			system("pause");
+			cout << "\n\t***************************************************************\n\n";
+			continue;
+		}
+
+		cout << "How many songs did you download this month? ";
+		cin >> songsDownloaded; cin.ignore(200, '\n');
+
+		
+		while (songsDownloaded >= 0 && songsDownloaded == int(songsDownloaded))
+		{
+
+			if (packageA == 1 && songsDownloaded <= FREE_SONGS_A)
+			{
+				songBill = PACKAGE_A;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\n\n";
+			}
+			if (packageA == 1 && songsDownloaded == FREE_SONGS_A+1)
+			{
+				songBill = PACKAGE_A + ADDITIONAL_A;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_A << " extra charges for having 1 more song\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_A << " free songs.\n\n\n";
+			}
+			if (packageA == 1 && songsDownloaded > FREE_SONGS_A+1)
+			{
+				songBill = PACKAGE_A + ADDITIONAL_A * (songsDownloaded - FREE_SONGS_A);
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_A << " extra charges for having " << (int(songsDownloaded) - FREE_SONGS_A) << " more songs\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_A << " free songs.\n\n\n";
+			}
+			if (packageB == 1 && songsDownloaded <= FREE_SONGS_B)
+			{
+				songBill = PACKAGE_B;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout << "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\n\n";
+			}
+			if (packageB == 1 && songsDownloaded == FREE_SONGS_B+1)
+			{
+				songBill = PACKAGE_B + ADDITIONAL_B;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_B << " extra charges for having 1 more song\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_B << " free songs.\n\n\n";
+			}
+			if (packageB == 1 && songsDownloaded > FREE_SONGS_B+1)
+			{
+				songBill = PACKAGE_B + ADDITIONAL_B * (songsDownloaded - FREE_SONGS_B);
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_B << " extra charges for having " << (int(songsDownloaded) - FREE_SONGS_B) << " more songs\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_B << " free songs.\n\n\n";
+			}
+			if (packageC == 1 && songsDownloaded <= FREE_SONGS_C)
+			{
+				songBill = PACKAGE_C;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout << "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\n\n";
+			}
+			if (packageC == 1 && songsDownloaded == FREE_SONGS_C+1)
+			{
+				songBill = PACKAGE_C + ADDITIONAL_C;
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_C << " extra charges for having 1 more song\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_C << " free songs.\n\n\n";
+			}
+			if (packageC == 1 && songsDownloaded > FREE_SONGS_C+1)
+			{
+				songBill = PACKAGE_C + ADDITIONAL_C * (songsDownloaded - FREE_SONGS_C);
+				totalBill = (songBill*SALES_TAX) + songBill;
+				cout
+					<< "\nYour total bill for this month is $" << songBill << " + " << songBill * SALES_TAX << " (for tax) = " << totalBill << ".\n\t"
+					<< "You have $" << songBill - PACKAGE_C << " extra charges for having " << (int(songsDownloaded) - FREE_SONGS_C) << " more songs\n\t"
+					<< "than your monthly limit of " << FREE_SONGS_C << " free songs.\n\n\n";
+			}
+	
+		 if (songsDownloaded != int(songsDownloaded))
+			cout << "\t*** Your number of songs needs to be a whole number!\n\n";
+	
+		cout << "Please select the menu option package you have? ";
+		cin >> packageChoice; cin.ignore(200, '\n');
+		
+		cout << "How many songs did you download this month? ";
+		cin >> songsDownloaded; cin.ignore(200, '\n');	
+		
+		}
+	
+			cout << "\t*** You cannot have a negative number of songs!\n\n";
+
+		packageA = 0; packageB = 0; packageC = 0;
+		system("pause");
+		cout << "\n\t***************************************************************\n\n";
+		continue;
+		return 0;
+}
+}
